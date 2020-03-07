@@ -1,0 +1,23 @@
+---
+
+- name: Install dependencies
+  apt:
+    name:
+      - gnupg1
+      - apt-transport-https
+      - dirmngr
+
+- name: Add Ookla APT key
+  apt_key:
+    id: 379CE192D401AB61
+    keyserver: keyserver.ubuntu.com
+
+- name: Add Ookla APT repo
+  apt_repository:
+    repo: "deb https://ookla.bintray.com/debian {{ ansible_distribution_release }} main"
+    filename: ookla
+
+- name: Install Speedtest
+  apt:
+    name:
+      - speedtest
